@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kreeda-Ankana | Ground & Match Organizer</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-database-compat.js"></script>
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero__overlay"></div>
+      <div class="hero__content">
+        <p class="eyebrow">KREEDA-ANKANA</p>
+        <h1>Village Ground & Friendly Match Organizer</h1>
+        <p>
+          Book your slots, challenge nearby teams, and celebrate scores in one sporty,
+          clean, and easy-to-use community board.
+        </p>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="card" id="booking-section">
+        <h2>⚡ Ground Calendar</h2>
+        <p class="muted">No double booking allowed. Reserve your team slot instantly.</p>
+
+        <form id="booking-form" class="form-grid">
+          <label>
+            Team Name
+            <input required id="teamName" placeholder="e.g., Tigers XI" />
+          </label>
+          <label>
+            Game
+            <select id="sportType" required>
+              <option value="Cricket">Cricket</option>
+              <option value="Volleyball">Volleyball</option>
+            </select>
+          </label>
+          <label>
+            Day
+            <select id="bookingDay" required></select>
+          </label>
+          <label>
+            Start
+            <input id="startTime" type="time" min="06:00" max="21:00" step="3600" required />
+          </label>
+          <label>
+            End
+            <input id="endTime" type="time" min="07:00" max="22:00" step="3600" required />
+          </label>
+          <button type="submit" class="btn">Book Slot</button>
+        </form>
+
+        <div id="booking-message" class="message"></div>
+
+        <div class="calendar-wrap">
+          <table id="calendar"></table>
+        </div>
+      </section>
+
+      <section class="card" id="challenge-section">
+        <h2>🏁 Challenge Board</h2>
+        <p class="muted">
+          Post an open challenge for another village team and let them reply.
+        </p>
+
+        <form id="challenge-form" class="form-grid">
+          <label>
+            Team
+            <input id="challengeTeam" required placeholder="e.g., River Side Club" />
+          </label>
+          <label>
+            Match Type
+            <select id="challengeSport" required>
+              <option value="Volleyball">Volleyball</option>
+              <option value="Cricket">Cricket</option>
+            </select>
+          </label>
+          <label>
+            Date
+            <input id="challengeDate" type="date" required />
+          </label>
+          <label class="full">
+            Message
+            <textarea id="challengeText" rows="2" required placeholder="We are ready this Sunday 4PM at Main Ground. Who's in?"></textarea>
+          </label>
+          <button type="submit" class="btn">Post Challenge</button>
+        </form>
+
+        <div id="challenge-list" class="stack"></div>
+      </section>
+
+      <section class="card" id="score-section">
+        <h2>🏆 Score Wall</h2>
+        <p class="muted">Show latest village match results and keep history.</p>
+
+        <form id="score-form" class="form-grid">
+          <label>
+            Team A
+            <input id="teamA" required />
+          </label>
+          <label>
+            Team B
+            <input id="teamB" required />
+          </label>
+          <label>
+            Score
+            <input id="scoreLine" required placeholder="e.g., 72/8 vs 65/10" />
+          </label>
+          <label>
+            Winner
+            <input id="winner" required />
+          </label>
+          <button type="submit" class="btn">Post Result</button>
+        </form>
+
+        <div id="score-list" class="stack"></div>
+      </section>
+    </main>
+
+    <footer>
+      <small>
+        Tip: Add your Firebase config in <code>app.js</code> for real-time cloud sync.
+        Without it, the app works offline in local browser storage.
+      </small>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
